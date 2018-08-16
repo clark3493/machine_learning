@@ -35,6 +35,10 @@ class Simplex(object):
     The standard maximum problem implies that x >= 0. Similarly for y in the standard
         minimum problem.
 
+    There is no need to redefine the 'which' parameter if requesting the opposite
+    solution value from how the Simplex object was originally defined. The 'which'
+    flag is only for solution efficiency.
+
     See Also
     --------
     Tableau : Simplex pivot table
@@ -42,6 +46,18 @@ class Simplex(object):
     References
     ----------
     [1] Ferguson, Thomas S., Linear Programming: A Concise Introduction.
+
+    Examples
+    --------
+    >>> import numpy as np
+    >>> A = [[0., 1., 2.], [-1., 0., -3.], [2., 1., 7.]]
+    >>> b = [3., -2., 5.]
+    >>> c = [1., 1., 5.]
+    >>> S = Simplex(A, b, c, which='min')
+    >>> np.round(S.x, 3)
+    array([0.   , 0.333, 0.667])
+    >>> np.round(S.min_solution, 3)
+    3.667
     """
 
     BOUNDED_FEASIBLE = 'Bounded Feasible'
@@ -395,6 +411,18 @@ class Tableau(object):
     References
     ----------
     [1] Ferguson, Thomas S., Linear Programming: A Concise Introduction.
+
+    Examples
+    --------
+    >>> A = [[0., 1., 2.], [-1., 0., -3.], [2., 1., 7.]]
+    >>> b = [3., -2., 5.]
+    >>> c = [1., 1., 5.]
+    >>> T = Tableau(A, b, c)
+    >>> T.pivot(2, 1)
+    >>> T.A
+    array([[-2., -1., -5.],
+           [-1., -0., -3.],
+           [ 2.,  1.,  7.]])
     """
     def __init__(self, A, b, c, debug=False):
         self._A = np.array(A)
