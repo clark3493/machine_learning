@@ -33,7 +33,7 @@ class Perceptron(object):
         :param y: Target values
         :type y: np.array, shape=[n_samples]
         :return: self
-        :rtpye: object
+        :rtype: object
         """
         rgen = np.random.RandomState(self.random_state)
         self._weights = rgen.normal(loc=0.0, scale=0.01, size=1 + X.shape[1])
