@@ -42,6 +42,14 @@ class LinprogTestCase(unittest.TestCase):
         return A, b, c
 
     @staticmethod
+    def init_problem_lists3():
+        """Example arrays and vectors from the dual problem of Ch 4 Exercise 1, p55 of UCLA LP document"""
+        A = [[1., -1., -2., -1.], [2., 0., 1., -4.], [-2., 1., 0., 1.]]
+        b = [4., 2., 1.]
+        c = [1., -2., -3., -1.]
+        return A, b, c
+
+    @staticmethod
     def init_unbounded_max_arrays1():
         """Example arrays and vectors from Exercise 3 of Ch 4 of UCLA LP document."""
         A = np.array([[-1., 3., 1.], [2., -1., -2.], [-1., 0., 1.]])
@@ -316,6 +324,12 @@ class LinprogTestCase(unittest.TestCase):
         solution = 4.
         self.assertAlmostEqual(solution, S.min_solution)
 
+    def test_solve_min3_solution_w_list_input(self):
+        A, b, c = self.init_problem_lists3()
+        S = Simplex(A, b, c, debug=False, which='min')
+
+        solution = 4.
+        self.assertAlmostEqual(solution, S.min_solution)
 
 if __name__ == '__main__':
     unittest.main()
