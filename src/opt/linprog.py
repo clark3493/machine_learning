@@ -82,7 +82,11 @@ class Simplex(object):
 
     @property
     def A(self):
-        """The original problem A array."""
+        """
+        The original problem A array.
+
+        Redefining this array will cause the Simplex's tableau to be reset (and solved if 'auto' is True).
+        """
         return self._A
 
     @A.setter
@@ -96,7 +100,11 @@ class Simplex(object):
 
     @property
     def b(self):
-        """The original problem b vector such that Ax<=b for a standard maximum problem."""
+        """
+        The original problem b vector such that Ax<=b for a standard maximum problem.
+
+        Redefining this vector will cause the Simplex's tableau to be reset (and solved if 'auto' is True).
+        """
         return self._b
 
     @b.setter
@@ -110,7 +118,11 @@ class Simplex(object):
 
     @property
     def c(self):
-        """The original c vector such that c.transpose().dot(x) should be maximized in a standard maximum problem."""
+        """
+        The original c vector such that c.transpose().dot(x) should be maximized in a standard maximum problem.
+
+        Redefining this vector will cause the Simplex's tableau to be reset (and solved if 'auto' is True).
+        """
         return self._c
 
     @c.setter
@@ -406,7 +418,7 @@ class Tableau(object):
     c: (n,) ndarray
         Problem c vector
     debug: bool, optional
-        Output debug information for each solution iteration. Debug=False.
+        Output debug information for each solution iteration. Default=False.
 
     References
     ----------
